@@ -13,17 +13,15 @@ import javax.swing.JButton;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.Font;
-import javax.swing.SwingConstants;
 
-public class FrmMain {
+
+public class frmMain {
 	Tablero tbl = new Tablero(4);
 	int[][] Matriz ;
-	int movimientos=1;
-	JLabel lblMovimientos;
-	JLabel[] cuadro = new JLabel[16];
-	static String path = new File("").getAbsolutePath();
-	JLabel lblGanaste = new JLabel("GANASTE!!!");
+	private int movimientos=1;
+	private JLabel lblMovimientos;
+	private JLabel[] cuadro = new JLabel[16];
+	private  static String path = new File("").getAbsolutePath();
 	
 	public JFrame frmRompeCabezas;
 
@@ -32,7 +30,7 @@ public class FrmMain {
 			public void run() {
 				try {
 
-					FrmMain window = new FrmMain();
+					frmMain window = new frmMain();
 					window.frmRompeCabezas.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +39,7 @@ public class FrmMain {
 		});
 	}
 
-	public FrmMain() {
+	public frmMain() {
 		initialize();
 	}
 
@@ -80,15 +78,6 @@ public class FrmMain {
 			posY = posY + 95;
 			posX = 0;
 		}
-		lblGanaste.setOpaque(true);
-		
-		
-		lblGanaste.setForeground(Color.RED);
-		lblGanaste.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGanaste.setFont(new Font("Tahoma", Font.PLAIN, 55));
-		lblGanaste.setBounds(0, 39, 475, 465);
-		lblGanaste.setVisible(false);
-		frmRompeCabezas.getContentPane().add(lblGanaste);
 
 
 		JLabel lblFondo = new JLabel("");
@@ -104,18 +93,19 @@ public class FrmMain {
 		JLabel lblTiempo = new JLabel("Tiempo:");
 		lblTiempo.setBounds(135, 11, 46, 14);
 		frmRompeCabezas.getContentPane().add(lblTiempo);
-
 		JButton btnReiniciar = new JButton("Reiniciar");
-
+		btnReiniciar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			frmWin.main(null);
+			}
+		});
 		btnReiniciar.setBounds(228, 7, 89, 23);
 		frmRompeCabezas.getContentPane().add(btnReiniciar);
-
 		JButton btnAyuda = new JButton("Ayuda");
 		btnAyuda.setBounds(330, 7, 89, 23);
 		frmRompeCabezas.getContentPane().add(btnAyuda);
-		
 		System.out.println(tbl.toString());
-
 	}
 
 	private void setActionListened(int var) {
@@ -141,11 +131,10 @@ public class FrmMain {
 					}
 				if (tbl.checkWin()){
 					//lblGanaste.setVisible(true);
-					FrmMain.this.frmRompeCabezas.setEnabled(false);
+					frmMain.this.frmRompeCabezas.setEnabled(false);
 					playSound("win");
-					
-					
-				}
+		
+					}
 				}
 			}
 		});
