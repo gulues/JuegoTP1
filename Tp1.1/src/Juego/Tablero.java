@@ -1,7 +1,7 @@
 package Juego;
 
 import java.util.ArrayList;
-
+import java.util.Collections;
 
 public class Tablero {
 	private int[][] tabla;
@@ -15,7 +15,7 @@ public class Tablero {
 			cuadrado.add(i);
 		}
 		cuadrado.add(0);
-		//Collections.shuffle(cuadrado);
+		Collections.shuffle(cuadrado);
 		int cont = 0;
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
