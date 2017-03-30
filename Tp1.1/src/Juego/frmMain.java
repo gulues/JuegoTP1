@@ -97,7 +97,7 @@ public class frmMain {
 		btnReiniciar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-			frmWin.main(null);
+			//frmWin.main(null);
 			}
 		});
 		btnReiniciar.setBounds(228, 7, 89, 23);
