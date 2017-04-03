@@ -1,5 +1,6 @@
 package Juego;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -25,12 +26,12 @@ public class Tablero {
 
 	}
 
-	public boolean moverCuadrado(int posX, int posY) {
+	public boolean moverCuadrado(Point Posxy) {
 		int[] xy0 = new int[2];
-		xy0 = checkPosicion(posX, posY);
+		xy0 = checkPosicion(Posxy.x, Posxy.y);
 		if (xy0[0] != -1) {
-			tabla[xy0[0]][xy0[1]] = tabla[posX][posY];
-			tabla[posX][posY] = 0;
+			tabla[xy0[0]][xy0[1]] = tabla[Posxy.x][Posxy.y];
+			tabla[Posxy.x][Posxy.y] = 0;
 			return true;
 		}
 		return false;
