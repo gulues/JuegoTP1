@@ -12,10 +12,9 @@ public class Tablero {
 		tabla = new int[size][size];
 		ArrayList<Integer> cuadrado;
 		cuadrado = new ArrayList<Integer>(size);
-		for (int i = 1; i < size * size; i++) {
+		for (int i = 0; i < size * size; i++) 
 			cuadrado.add(i);
-		}
-		cuadrado.add(0);
+		
 		Collections.shuffle(cuadrado);
 		int cont = 0;
 		for (int i = 0; i < size; i++) {
@@ -26,12 +25,12 @@ public class Tablero {
 
 	}
 
-	public boolean moverCuadrado(Point Posxy) {
-		int[] xy0 = new int[2];
-		xy0 = checkPosicion(Posxy.x, Posxy.y);
-		if (xy0[0] != -1) {
-			tabla[xy0[0]][xy0[1]] = tabla[Posxy.x][Posxy.y];
-			tabla[Posxy.x][Posxy.y] = 0;
+	public boolean moverCuadrado(Point coord) {
+		int[] posInicial = new int[2];
+		posInicial = checkPosicion(coord.x, coord.y);
+		if (posInicial[0] != -1) {
+			tabla[posInicial[0]][posInicial[1]] = tabla[coord.x][coord.y];
+			tabla[coord.x][coord.y] = 0;
 			return true;
 		}
 		return false;
