@@ -2,10 +2,13 @@ package Juego;
 
 import java.awt.EventQueue;
 import java.awt.Point;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -76,7 +79,11 @@ public class frmMain {
 		btnReiniciar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-			//frmWin.main(null);
+				 int restart=JOptionPane.showConfirmDialog (null, "¿Desea reiniciar la partida?","Warning",JOptionPane.YES_NO_OPTION);
+				if (restart==0) {
+					crearCuadros();
+				}
+				 //frmWin.main(null);
 			}
 		});
 	}
@@ -105,30 +112,27 @@ public class frmMain {
 			posX = 0;
 		}
 	}
-
-	private void setActionListened(int var) {
-		cuadro[var].addMouseListener(new MouseAdapter() {
+//Crear las acciones del clic en cada uno de los Cuadros: Jlabel[]
+	private void setActionListened(int index) {
+		cuadro[index].addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				JLabel label = (JLabel) e.getSource();
-				String str = label.getText();
-				String[] ar = str.split(",");
-				Point cuadroXY= new Point(Integer.parseInt(ar[0]),Integer.parseInt(ar[1]));
+				JLabel labelAux = (JLabel) e.getSource();
+				String str = labelAux.getText();
+				String[] coord = str.split(",");
+				Point cuadroXY= new Point(Integer.parseInt(coord[0]),Integer.parseInt(coord[1]));
 				
 				if(tbl.moverCuadrado(cuadroXY)){
 					Matriz = tbl.getTabla();
 					int cont=0;
 					lblMovimientos.setText("Movimientos: " + movimientos++);
 					
-					for (int i = 0; i < 4; i++) {
-						for (int j = 0; j < 4; j++) {
+					for (int i = 0; i < tbl.size; i++) {
+						for (int j = 0; j < tbl.size; j++) {
 							cuadro[cont].setText(i + "," + j);
-							cuadro[cont++].setIcon(new ImageIcon( "img/"
-									+ Matriz[i][j] + ".png"));
-							
+							cuadro[cont++].setIcon(new ImageIcon( "img/"+ Matriz[i][j] + ".png"));
 						}
 					}
 				if (tbl.checkWin()){
-					frmMain.this.frmRompeCabezas.setEnabled(false);
 					playSound("win");
 		
 					}
@@ -139,7 +143,7 @@ public class frmMain {
 	}
 
 	private static void playSound(String sound){
-		String audioFilePath =  "/sounds/"+sound+".wav";
+		String audioFilePath =  "sounds/"+sound+".wav";
         Sonidos player = new Sonidos();
         player.play(audioFilePath);
 	}

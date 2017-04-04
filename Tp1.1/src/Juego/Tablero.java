@@ -6,9 +6,10 @@ import java.util.Collections;
 
 public class Tablero {
 	private int[][] tabla;
+	public  int size;
 
 	public Tablero(int size) {
-
+		this.size=size;
 		tabla = new int[size][size];
 		ArrayList<Integer> cuadrado;
 		cuadrado = new ArrayList<Integer>(size);
