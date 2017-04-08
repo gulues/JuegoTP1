@@ -100,8 +100,8 @@ public class frmMain {
 				cuadro[cont] = new JLabel();
 				cuadro[cont].setText(i + "," + j);
 				cuadro[cont].setIcon(new ImageIcon("img/" + Matriz[i][j]+ ".png"));
-				cuadro[cont].setBounds(50 + posX, 105 + posY, 95, 95);
-				posX = posX + 100;
+				cuadro[cont].setBounds(60 + posX, 95 + posY, 95, 95);
+				posX = posX + 95;
 				setActionListened(cont);
 				frmRompeCabezas.getContentPane().add(cuadro[cont++]);
 			}
