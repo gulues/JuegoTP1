@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -22,6 +24,7 @@ import java.awt.Color;
 
 import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
+
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
@@ -40,13 +43,10 @@ public class frmMain {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
+		
+				frmMain window = new frmMain();
+				window.frmRompeCabezas.setVisible(true);
 
-					frmMain window = new frmMain();
-					window.frmRompeCabezas.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 			}
 		});
 	}
@@ -64,7 +64,13 @@ public class frmMain {
 		frmRompeCabezas.setResizable(false);
 		frmRompeCabezas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmRompeCabezas.getContentPane().setLayout(null);
-		
+		 try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+		} catch (ClassNotFoundException | InstantiationException
+				| IllegalAccessException | UnsupportedLookAndFeelException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		panel1.setVisible(true);
 		panel3.setVisible(false);
 		panel3.setBounds(0, 0, 485, 515);
@@ -73,7 +79,8 @@ public class frmMain {
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+			panel1.setVisible(true);
+			panel3.setVisible(false);
 			}
 		});
 		btnAceptar.setBounds(81, 453, 142, 51);
@@ -130,6 +137,7 @@ public class frmMain {
 			rdbtnNumeros.addItemListener(new ItemListener() {
 				public void itemStateChanged(ItemEvent arg0) {
 					changeImagePreview("numbers");
+					
 				}
 			});
 			rdbtnNumeros.addMouseListener(new MouseAdapter() {
@@ -180,7 +188,7 @@ public class frmMain {
 		btnJugar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				tbl = new Tablero(4);
-				crearCuadros("numbers");
+				crearCuadros(lblPreview.getText());
 				panel1.setVisible(false);
 				panel2.setVisible(true);
 			}
@@ -291,7 +299,7 @@ public class frmMain {
 						+ Matriz[i][j] + ".png"));
 				cuadro[cont].setBounds(60 + posX, 95 + posY, 95, 95);
 				posX = posX + 95;
-				setActionListened(cont,"numbers");
+				setActionListened(cont,Style);
 				panel2.add(cuadro[cont++]);
 				//frmRompeCabezas.getContentPane().add(cuadro[cont++]);
 
@@ -334,6 +342,7 @@ public class frmMain {
 	}
  private void changeImagePreview(String preview) {
 	lblPreview.setIcon(new ImageIcon("img/" +preview+ "/preview.png"));
+	lblPreview.setText(preview);
 	
 }
 
