@@ -45,7 +45,9 @@ public class frmMain {
 	private JPanel panel4 = new JPanel();
 	private JLabel lblPreview = new JLabel("");
 	private JLabel lbWin = new JLabel("");
-	private JTextField textField;
+	private JTextField txtNombre;
+	private String tiempo;
+	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -84,9 +86,14 @@ public class frmMain {
 		panel4.setLayout(null);
 		
 		JButton btnVolverAJugar = new JButton("Volver a Jugar");
+		
 		btnVolverAJugar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
+				Archivos file = new Archivos(txtNombre.getText(), tiempo, movimientos);
+				file.guardar();
+				
 				frmRompeCabezas.dispose();
 				frmMain.main(null);
 			}
@@ -104,12 +111,13 @@ public class frmMain {
 		btnEnd.setBounds(242, 458, 126, 46);
 		panel4.add(btnEnd);
 		
-		textField = new JTextField();
-		textField.setBounds(133, 413, 182, 28);
-		panel4.add(textField);
-		textField.setColumns(10);
+		txtNombre = new JTextField();
+		txtNombre.setBounds(133, 413, 182, 28);
+		panel4.add(txtNombre);
+		txtNombre.setColumns(10);
 		
 		JLabel lblEscribeTuNombre = new JLabel("Escribe tu nombre para guardar tu puntuaci\u00F3n: ");
+		lblEscribeTuNombre.setForeground(Color.WHITE);
 		lblEscribeTuNombre.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEscribeTuNombre.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblEscribeTuNombre.setBounds(0, 388, 485, 14);
@@ -121,11 +129,13 @@ public class frmMain {
 		panel4.add(lblFelicitaciones);
 		
 		JLabel lblTiempo_1 = new JLabel("TIEMPO:");
+		lblTiempo_1.setForeground(Color.WHITE);
 		lblTiempo_1.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblTiempo_1.setBounds(79, 330, 271, 14);
 		panel4.add(lblTiempo_1);
 		
 		JLabel lblMovimientos_1 = new JLabel("MOVIMIENTOS:");
+		lblMovimientos_1.setForeground(Color.WHITE);
 		lblMovimientos_1.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblMovimientos_1.setBounds(78, 355, 333, 14);
 		panel4.add(lblMovimientos_1);
