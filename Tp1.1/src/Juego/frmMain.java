@@ -3,6 +3,7 @@ package Juego;
 import java.awt.EventQueue;
 import java.awt.Point;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,13 +12,19 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JPanel;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Color;
+
 import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+
 
 public class frmMain {
 	private int[][] Matriz;
@@ -29,7 +36,7 @@ public class frmMain {
 	private JPanel panel1 = new JPanel();
 	private JPanel panel2 = new JPanel();
 	private JPanel panel3 = new JPanel();
-
+	private JLabel lblPreview = new JLabel("");
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -59,6 +66,111 @@ public class frmMain {
 		frmRompeCabezas.getContentPane().setLayout(null);
 		
 		panel1.setVisible(true);
+		panel3.setVisible(false);
+		panel3.setBounds(0, 0, 485, 515);
+		frmRompeCabezas.getContentPane().add(panel3);
+		panel3.setLayout(null);
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			}
+		});
+		btnAceptar.setBounds(81, 453, 142, 51);
+		panel3.add(btnAceptar);
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel3.setVisible(false);
+				panel1.setVisible(true);
+			}
+		});
+		btnVolver.setBounds(255, 453, 142, 51);
+		panel3.add(btnVolver);
+		
+		JPanel pnlOptions = new JPanel();
+		pnlOptions.setOpaque(false);
+		pnlOptions.setBounds(81, 54, 316, 86);
+		panel3.add(pnlOptions);
+		pnlOptions.setLayout(null);
+		
+			JRadioButton rdbtnImagenGato = new JRadioButton("Imagen Gato");
+			rdbtnImagenGato.addItemListener(new ItemListener() {
+				public void itemStateChanged(ItemEvent e) {
+					changeImagePreview("cat");
+				}
+			});
+			rdbtnImagenGato.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					changeImagePreview("cat");
+				}
+			});
+			rdbtnImagenGato.setBounds(54, 59, 230, 23);
+			pnlOptions.add(rdbtnImagenGato);
+			
+			JRadioButton rdbtnImagenPerro = new JRadioButton("Imagen Perro");
+			rdbtnImagenPerro.addItemListener(new ItemListener() {
+				public void itemStateChanged(ItemEvent e) {
+					changeImagePreview("dog");
+				}
+			});
+			rdbtnImagenPerro.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					changeImagePreview("dog");
+				}
+			});
+			
+			rdbtnImagenPerro.setBounds(54, 33, 230, 23);
+			pnlOptions.add(rdbtnImagenPerro);
+			
+			JRadioButton rdbtnNumeros = new JRadioButton("Numeros");
+			rdbtnNumeros.addItemListener(new ItemListener() {
+				public void itemStateChanged(ItemEvent arg0) {
+					changeImagePreview("numbers");
+				}
+			});
+			rdbtnNumeros.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+						changeImagePreview("numbers");
+				}
+
+				
+			});
+			rdbtnNumeros.setBounds(54, 7, 230, 23);
+			pnlOptions.add(rdbtnNumeros);
+			rdbtnNumeros.setSelected(true);
+			ButtonGroup bg = new ButtonGroup();
+			
+			bg.add(rdbtnNumeros);
+			bg.add(rdbtnImagenPerro);
+			bg.add(rdbtnImagenGato);
+		
+		JLabel lblSeleccioneLaImagen = new JLabel("Seleccione el tipo de juego:");
+		lblSeleccioneLaImagen.setBounds(81, 27, 178, 23);
+		panel3.add(lblSeleccioneLaImagen);
+		
+		
+		
+		
+		
+		lblPreview.setOpaque(true);
+		lblPreview.setBounds(118, 192, 250, 250);
+		lblPreview.setIcon(new ImageIcon("img/numbers/preview.png"));
+		panel3.add(lblPreview);
+		
+		JLabel lblVistaPrevia = new JLabel("Vista Previa");
+		lblVistaPrevia.setBounds(81, 158, 178, 23);
+		panel3.add(lblVistaPrevia);
+		
+		JLabel lblFondo3 = new JLabel("");
+		lblFondo3.setBounds(0, 0, 485, 515);
+		lblFondo3.setIcon(new ImageIcon("img/background.png"));
+		panel3.add(lblFondo3);
+		panel3.setVisible(false);
 		panel1.setBounds(0, 0, 484, 515);
 		panel1.setLayout(null);
 		frmRompeCabezas.getContentPane().add(panel1);
@@ -118,24 +230,23 @@ public class frmMain {
 		lblFondo1.setBounds(0, 0, 485, 515);
 		panel1.add(lblFondo1);
 		lblFondo1.setIcon(new ImageIcon("img/background.png"));
-				panel3.setVisible(false);
 				panel2.setBounds(0, 0, 484, 515);
 				frmRompeCabezas.getContentPane().add(panel2);
 				panel2.setLayout(null);
 				
 						lblMovimientos = new JLabel("Movimientos:");
-						lblMovimientos.setBounds(20, 9, 63, 14);
+						lblMovimientos.setBounds(20, 9, 143, 14);
 						panel2.add(lblMovimientos);
 						
 								JLabel lblTiempo = new JLabel("Tiempo:");
-								lblTiempo.setBounds(141, 9, 38, 14);
+								lblTiempo.setBounds(141, 9, 111, 14);
 								panel2.add(lblTiempo);
 								
 										JButton btnReiniciar = new JButton("Reiniciar");
-										btnReiniciar.setBounds(276, 5, 73, 23);
+										btnReiniciar.setBounds(276, 5, 100, 23);
 										panel2.add(btnReiniciar);
 										JButton btnAyuda = new JButton("Ayuda");
-										btnAyuda.setBounds(375, 5, 63, 23);
+										btnAyuda.setBounds(375, 5, 99, 23);
 										panel2.add(btnAyuda);
 										
 												JLabel lblFondo = new JLabel("");
@@ -159,68 +270,10 @@ public class frmMain {
 																}
 															}
 														});
-				panel3.setBounds(0, 0, 485, 515);
-				frmRompeCabezas.getContentPane().add(panel3);
-				panel3.setLayout(null);
-				JButton btnNewButton_2 = new JButton("Aceptar");
-				btnNewButton_2.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-					
-					}
-				});
-				btnNewButton_2.setBounds(81, 453, 142, 51);
-				panel3.add(btnNewButton_2);
-				
-				JButton btnNewButton_3 = new JButton("Volver");
-				btnNewButton_3.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						panel3.setVisible(false);
-						panel1.setVisible(true);
-					}
-				});
-				btnNewButton_3.setBounds(255, 453, 142, 51);
-				panel3.add(btnNewButton_3);
-				
-				JLabel lblSeleccioneLaImagen = new JLabel("Seleccione el tipo de juego:");
-				lblSeleccioneLaImagen.setBounds(81, 27, 178, 23);
-				panel3.add(lblSeleccioneLaImagen);
-				
-				JPanel panel = new JPanel();
-				panel.setBounds(81, 54, 316, 86);
-				panel3.add(panel);
-				panel.setLayout(null);
-				
-				JRadioButton rdbtnImagenGato = new JRadioButton("Imagen Gato");
-				rdbtnImagenGato.setBounds(54, 59, 87, 23);
-				panel.add(rdbtnImagenGato);
-				
-				JRadioButton rdbtnImagenPerro = new JRadioButton("Imagen Perro");
-				rdbtnImagenPerro.setBounds(54, 33, 91, 23);
-				panel.add(rdbtnImagenPerro);
-				
-				JRadioButton rdbtnNumeros = new JRadioButton("Numeros");
-				rdbtnNumeros.setBounds(54, 7, 67, 23);
-				panel.add(rdbtnNumeros);
-				rdbtnNumeros.setSelected(true);
-				
-				JLabel lblPreview = new JLabel("");
-				lblPreview.setOpaque(true);
-				lblPreview.setBounds(118, 192, 250, 250);
-				panel3.add(lblPreview);
-				
-				JLabel lblVistaPrevia = new JLabel("Vista Previa");
-				lblVistaPrevia.setBounds(81, 158, 178, 23);
-				panel3.add(lblVistaPrevia);
-				
-				JLabel lblFondo3 = new JLabel("");
-				lblFondo3.setBounds(0, 0, 485, 515);
-				lblFondo3.setIcon(new ImageIcon("img/background.png"));
-				panel3.add(lblFondo3);
 				
 				
 				panel1.setVisible(true);
 				panel2.setVisible(false);
-				panel3.setVisible(false);
 	}
 
 	private void crearCuadros(String Style) {
@@ -279,10 +332,15 @@ public class frmMain {
 		});
 
 	}
+ private void changeImagePreview(String preview) {
+	lblPreview.setIcon(new ImageIcon("img/" +preview+ "/preview.png"));
+	
+}
 
-	private static void playSound(String sound) {
+ private static void playSound(String sound) {
 		String audioFilePath = "sounds/" + sound + ".wav";
 		Sonidos player = new Sonidos();
 		player.play(audioFilePath);
 	}
+	
 }
