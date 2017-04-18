@@ -11,14 +11,19 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JPanel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class frmMain {
 	private int[][] Matriz;
 	private int movimientos = 1;
 	private JLabel lblMovimientos;
 	private JLabel[] cuadro = new JLabel[16];
-	public JFrame frmRompeCabezas;
+	private JFrame frmRompeCabezas;
 	private Tablero tbl;
+	private JPanel panel1 = new JPanel();
+	private JPanel panel2 = new JPanel();
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -47,29 +52,68 @@ public class frmMain {
 		frmRompeCabezas.setResizable(false);
 		frmRompeCabezas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmRompeCabezas.getContentPane().setLayout(null);
-		 
+
 		tbl = new Tablero(4);
 		crearCuadros();
+		panel2.setVisible(false);
+		panel1.setBounds(0, 0, 484, 515);
+		frmRompeCabezas.getContentPane().add(panel1);
+		panel1.setLayout(null);
+
+		JButton btnJugar = new JButton("Jugar");
+		btnJugar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				panel1.setVisible(false);
+				panel2.setVisible(true);
+			}
+		});
+		btnJugar.setBounds(173, 95, 165, 50);
+		panel1.add(btnJugar);
+
+		JButton btnLogros = new JButton("Logros");
+		btnLogros.setBounds(173, 186, 165, 42);
+		panel1.add(btnLogros);
+
+		JLabel lblPuzzle = new JLabel("PUZZLE");
+		lblPuzzle.setBounds(221, 38, 46, 14);
+		panel1.add(lblPuzzle);
+
+		JButton btnNewButton_1 = new JButton("Salir");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmRompeCabezas.dispose();
+			}
+		});
+		btnNewButton_1.setBounds(173, 265, 165, 50);
+		panel1.add(btnNewButton_1);
+
+		JLabel lblFondo1 = new JLabel("");
+		lblFondo1.setBounds(0, 0, 485, 515);
+		panel1.add(lblFondo1);
+		panel2.setBounds(0, 0, 484, 515);
+		lblFondo1.setIcon(new ImageIcon("img/background.png"));
+		frmRompeCabezas.getContentPane().add(panel2);
+		panel2.setLayout(null);
 
 		JLabel lblFondo = new JLabel("");
+		lblFondo.setBounds(116, 16, 0, 0);
+		panel2.add(lblFondo);
 		lblFondo.setIcon(new ImageIcon("img/cuadrado.png"));
-		lblFondo.setBounds(0, 50, 484, 465);
-		frmRompeCabezas.getContentPane().add(lblFondo);
 
 		lblMovimientos = new JLabel("Movimientos:");
-		lblMovimientos.setBounds(10, 11, 115, 14);
-		frmRompeCabezas.getContentPane().add(lblMovimientos);
+		lblMovimientos.setBounds(20, 9, 63, 14);
+		panel2.add(lblMovimientos);
 
 		JLabel lblTiempo = new JLabel("Tiempo:");
-		lblTiempo.setBounds(135, 11, 46, 14);
-		frmRompeCabezas.getContentPane().add(lblTiempo);
+		lblTiempo.setBounds(141, 9, 38, 14);
+		panel2.add(lblTiempo);
 
 		JButton btnReiniciar = new JButton("Reiniciar");
-		btnReiniciar.setBounds(228, 7, 89, 23);
-		frmRompeCabezas.getContentPane().add(btnReiniciar);
+		btnReiniciar.setBounds(276, 5, 73, 23);
+		panel2.add(btnReiniciar);
 		JButton btnAyuda = new JButton("Ayuda");
-		btnAyuda.setBounds(330, 7, 89, 23);
-		frmRompeCabezas.getContentPane().add(btnAyuda);
+		btnAyuda.setBounds(375, 5, 63, 23);
+		panel2.add(btnAyuda);
 
 		// Accciones
 		btnReiniciar.addMouseListener(new MouseAdapter() {
@@ -79,11 +123,11 @@ public class frmMain {
 						"¿Desea reiniciar la partida?", "Warning",
 						JOptionPane.YES_NO_OPTION);
 				if (restart == 0) {
-					//HACER
-					
+					// HACER
+
 					frmRompeCabezas.dispose();
 					frmMain.main(null);
-					
+
 				}
 			}
 		});
@@ -99,19 +143,21 @@ public class frmMain {
 			for (int j = 0; j < 4; j++) {
 				cuadro[cont] = new JLabel();
 				cuadro[cont].setText(i + "," + j);
-				cuadro[cont].setIcon(new ImageIcon("img/" + Matriz[i][j]+ ".png"));
+
+				cuadro[cont].setIcon(new ImageIcon("img/" + Matriz[i][j]
+						+ ".png"));
 				cuadro[cont].setBounds(60 + posX, 95 + posY, 95, 95);
 				posX = posX + 95;
 				setActionListened(cont);
-				frmRompeCabezas.getContentPane().add(cuadro[cont++]);
+				panel2.add(cuadro[cont]);
+				// frmRompeCabezas.getContentPane().add(cuadro[cont++]);
+
 			}
 			posY = posY + 95;
 			posX = 0;
 		}
 	}
-	
-	
-	
+
 	// Crear las acciones del clic en cada uno de los Cuadros: Jlabel[]
 	private void setActionListened(int index) {
 		cuadro[index].addMouseListener(new MouseAdapter() {
@@ -130,7 +176,8 @@ public class frmMain {
 					for (int i = 0; i < tbl.size; i++) {
 						for (int j = 0; j < tbl.size; j++) {
 							cuadro[cont].setText(i + "," + j);
-							cuadro[cont++].setIcon(new ImageIcon("img/"+ Matriz[i][j] + ".png"));
+							cuadro[cont++].setIcon(new ImageIcon("img/"
+									+ Matriz[i][j] + ".png"));
 						}
 					}
 					if (tbl.checkWin()) {
