@@ -55,10 +55,14 @@ public class frmMain {
 
 		tbl = new Tablero(4);
 		crearCuadros();
+		
+		//paneles
+		
 		panel2.setVisible(false);
 		panel1.setBounds(0, 0, 484, 515);
-		frmRompeCabezas.getContentPane().add(panel1);
 		panel1.setLayout(null);
+		frmRompeCabezas.getContentPane().add(panel1);
+		
 
 		JButton btnJugar = new JButton("Jugar");
 		btnJugar.addActionListener(new ActionListener() {
@@ -71,7 +75,7 @@ public class frmMain {
 		panel1.add(btnJugar);
 
 		JButton btnLogros = new JButton("Logros");
-		btnLogros.setBounds(173, 186, 165, 42);
+		btnLogros.setBounds(173, 263, 165, 42);
 		panel1.add(btnLogros);
 
 		JLabel lblPuzzle = new JLabel("PUZZLE");
@@ -84,8 +88,18 @@ public class frmMain {
 				frmRompeCabezas.dispose();
 			}
 		});
-		btnNewButton_1.setBounds(173, 265, 165, 50);
+		btnNewButton_1.setBounds(173, 343, 165, 50);
 		panel1.add(btnNewButton_1);
+		
+		JButton btnNewButton = new JButton("Configuraci\u00F3n");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			
+			}
+		});
+		btnNewButton.setBounds(173, 189, 165, 50);
+		panel1.add(btnNewButton);
 
 		JLabel lblFondo1 = new JLabel("");
 		lblFondo1.setBounds(0, 0, 485, 515);
