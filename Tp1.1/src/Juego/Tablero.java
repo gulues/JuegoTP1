@@ -6,17 +6,18 @@ import java.util.Collections;
 
 public class Tablero {
 	private int[][] tabla;
-	public  int size;
+	public int size;
 
 	public Tablero(int size) {
-		this.size=size;
+		this.size = size;
 		tabla = new int[size][size];
 		ArrayList<Integer> cuadrado;
 		cuadrado = new ArrayList<Integer>(size);
-		for (int i = 0; i < size * size; i++) 
+		for (int i = 1; i < size * size; i++)
 			cuadrado.add(i);
-		
-		Collections.shuffle(cuadrado);
+
+		//Collections.shuffle(cuadrado);
+		cuadrado.add(0);
 		int cont = 0;
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
@@ -47,7 +48,7 @@ public class Tablero {
 				PosXY[0] = posX - 1;
 				PosXY[1] = posY;
 			}
-		if (posX < tabla.length-1)
+		if (posX < tabla.length - 1)
 			if (tabla[posX + 1][posY] == 0) {
 				PosXY[0] = posX + 1;
 				PosXY[1] = posY;
@@ -57,7 +58,7 @@ public class Tablero {
 				PosXY[0] = posX;
 				PosXY[1] = posY - 1;
 			}
-		if (posY < tabla.length-1)
+		if (posY < tabla.length - 1)
 			if (tabla[posX][posY + 1] == 0) {
 				PosXY[0] = posX;
 				PosXY[1] = posY + 1;
@@ -75,21 +76,19 @@ public class Tablero {
 	}
 
 	public boolean checkWin() {
-		int cont=1;
-		int comp=0;
+		int cont = 1;
+		int comp = 0;
 		for (int i = 0; i < tabla.length; i++) {
 			for (int j = 0; j < tabla.length; j++) {
-				if (tabla[i][j]==cont++)
+				if (tabla[i][j] == cont++)
 					comp++;
 				else
 					break;
 			}
 		}
-		if (comp==(tabla.length *tabla.length)-1)
+		if (comp == (tabla.length * tabla.length) - 1)
 			return true;
 		return false;
 	}
-
-
 
 }

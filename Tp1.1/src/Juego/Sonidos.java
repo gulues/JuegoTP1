@@ -29,26 +29,23 @@ public class Sonidos implements LineListener {
 			audioClip.addLineListener(this);
 			audioClip.open(audioStream);
 			audioClip.start();
-			
+
 			if (!playCompleted)
-			audioClip.close();
+				audioClip.close();
 
 		} catch (UnsupportedAudioFileException ex) {
 			ex.printStackTrace();
-		}
-		catch (LineUnavailableException ex){ 
+		} catch (LineUnavailableException ex) {
+			ex.printStackTrace();
+		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		 catch (IOException ex){ 
-			ex.printStackTrace();
-		 }
-		
 
 	}
 
 	@Override
 	public void update(LineEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
