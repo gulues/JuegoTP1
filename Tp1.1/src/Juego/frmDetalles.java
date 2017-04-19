@@ -2,7 +2,7 @@ package Juego;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.Panel;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -30,7 +30,8 @@ public class frmDetalles extends JDialog {
 	}
 
 	public frmDetalles() {
-		JScrollPane contenedorTblReservas = new JScrollPane();
+		
+		JScrollPane scrollTblJugadores = new JScrollPane();
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -38,15 +39,11 @@ public class frmDetalles extends JDialog {
 		contentPanel.setLayout(null);
 		tblJugadores = new JTable(modeloJugadores);
 		tblJugadores.setFillsViewportHeight(true);
-		contenedorTblReservas.setViewportView(tblJugadores);
-		Panel panel = new Panel();
-		panel.setBounds(10, 10, 424, 208);
-		contentPanel.add(panel);
+		scrollTblJugadores.setViewportView(tblJugadores);
 		modeloJugadores = new DefaultTableModel();
 		modeloJugadores.addColumn("Nombre Jugador");
 		modeloJugadores.addColumn("Tiempo");
 		modeloJugadores.addColumn("Movimientos");
-		panel.setLayout(null);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -64,5 +61,20 @@ public class frmDetalles extends JDialog {
 			}
 		}
 	}
+	public static void refreshTable(ArrayList<Jugador> listadoJugadores) {
+		// Cargar modelo de jugadores
+		for (int i = 0; i < modeloJugadores.getRowCount(); i++) {
+			modeloJugadores.removeRow(i);
+			i -= 1;
+		}
+		Object[] arreglo = new String[3];
 
+		for (Jugador j : listadoJugadores) {
+			arreglo[0] = j.nombre;
+			arreglo[1] = j.tiempo;
+			arreglo[2] = j.movimientos;
+			modeloJugadores.addRow(arreglo);
+		}
+		
+	}
 }

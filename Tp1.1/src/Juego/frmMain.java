@@ -29,8 +29,8 @@ import javax.swing.border.LineBorder;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import java.awt.Rectangle;
-import javax.swing.JTextField;
 
+import javax.swing.JTextField;
 
 public class frmMain {
 	private int[][] Matriz;
@@ -46,8 +46,9 @@ public class frmMain {
 	private JLabel lblPreview = new JLabel("");
 	private JLabel lbWin = new JLabel("");
 	private JTextField txtNombre;
-	private String tiempo;
-	
+	public static JLabel lblTiempo = new JLabel("Tiempo:");
+	private JLabel lblMovimientosFinal;
+	private JLabel lblTiempoFinal;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -79,77 +80,118 @@ public class frmMain {
 		}
 		setPanelVisible(0);
 		ButtonGroup bg = new ButtonGroup();
-		
 
 		panel4.setBounds(0, 0, 484, 515);
 		frmRompeCabezas.getContentPane().add(panel4);
 		panel4.setLayout(null);
-		
+
 		JButton btnVolverAJugar = new JButton("Volver a Jugar");
-		
+
 		btnVolverAJugar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				Archivos file = new Archivos(txtNombre.getText(), tiempo, movimientos);
+
+				Archivos file = new Archivos(txtNombre.getText(), lblTiempo
+						.getText(), movimientos);
 				file.guardar();
-				
+
 				frmRompeCabezas.dispose();
 				frmMain.main(null);
 			}
 		});
 		btnVolverAJugar.setBounds(78, 458, 126, 46);
 		panel4.add(btnVolverAJugar);
-		
+
 		JButton btnEnd = new JButton("Salir");
 		btnEnd.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			frmRompeCabezas.dispose();
+				frmRompeCabezas.dispose();
 			}
 		});
 		btnEnd.setBounds(242, 458, 126, 46);
 		panel4.add(btnEnd);
-		
+
 		txtNombre = new JTextField();
 		txtNombre.setBounds(133, 413, 182, 28);
 		panel4.add(txtNombre);
 		txtNombre.setColumns(10);
-		
-		JLabel lblEscribeTuNombre = new JLabel("Escribe tu nombre para guardar tu puntuaci\u00F3n: ");
+
+		JLabel lblEscribeTuNombre = new JLabel(
+				"Escribe tu nombre para guardar tu puntuaci\u00F3n: ");
 		lblEscribeTuNombre.setForeground(Color.WHITE);
 		lblEscribeTuNombre.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEscribeTuNombre.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblEscribeTuNombre.setBounds(0, 388, 485, 14);
 		panel4.add(lblEscribeTuNombre);
-		
+
 		JLabel lblFelicitaciones = new JLabel("FELICITACIONES!!!");
 		lblFelicitaciones.setFont(new Font("Tahoma", Font.BOLD, 26));
 		lblFelicitaciones.setBounds(110, 163, 252, 36);
 		panel4.add(lblFelicitaciones);
-		
-		JLabel lblTiempo_1 = new JLabel("TIEMPO:");
-		lblTiempo_1.setForeground(Color.WHITE);
-		lblTiempo_1.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblTiempo_1.setBounds(79, 330, 271, 14);
-		panel4.add(lblTiempo_1);
-		
-		JLabel lblMovimientos_1 = new JLabel("MOVIMIENTOS:");
-		lblMovimientos_1.setForeground(Color.WHITE);
-		lblMovimientos_1.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblMovimientos_1.setBounds(78, 355, 333, 14);
-		panel4.add(lblMovimientos_1);
-		
-		
+
+		JLabel lblTiempoFinal_1 = new JLabel("TIEMPO:");
+		lblTiempoFinal_1.setForeground(Color.WHITE);
+		lblTiempoFinal_1.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblTiempoFinal_1.setBounds(79, 330, 271, 14);
+		panel4.add(lblTiempoFinal_1);
+
+		lblMovimientosFinal = new JLabel("MOVIMIENTOS:");
+		lblMovimientosFinal.setForeground(Color.WHITE);
+		lblMovimientosFinal.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblMovimientosFinal.setBounds(78, 355, 333, 14);
+		panel4.add(lblMovimientosFinal);
+
 		lbWin.setBorder(new LineBorder(new Color(0, 0, 0)));
 		lbWin.setBounds(new Rectangle(41, 0, 400, 323));
-		
-				panel4.add(lbWin);
-				
-				JLabel lblFondoWin = new JLabel("");
-				lblFondoWin.setBounds(0, 0, 485, 515);
-				lblFondoWin.setIcon(new ImageIcon("img/background.png"));
-				panel4.add(lblFondoWin);
+
+		panel4.add(lbWin);
+
+		JLabel lblFondoWin = new JLabel("");
+		lblFondoWin.setBounds(0, 0, 485, 515);
+		lblFondoWin.setIcon(new ImageIcon("img/background.png"));
+		panel4.add(lblFondoWin);
+
+		frmRompeCabezas.getContentPane().add(panel2);
+
+		lblMovimientos = new JLabel("Movimientos:");
+		lblMovimientos.setBounds(20, 9, 119, 14);
+
+		lblTiempo.setBounds(141, 9, 111, 14);
+
+		JButton btnReiniciar = new JButton("Menu Principal");
+		btnReiniciar.setBounds(276, 5, 100, 23);
+
+		JButton btnAyuda = new JButton("Ayuda");
+		btnAyuda.setBounds(386, 5, 99, 23);
+
+		JLabel lblFondo = new JLabel("");
+		lblFondo.setBounds(0, 35, 484, 480);
+		lblFondo.setIcon(new ImageIcon("img/cuadrado.png"));
+
+		panel2.setBounds(0, 0, 484, 515);
+		panel2.setLayout(null);
+		panel2.add(btnAyuda);
+		panel2.add(btnReiniciar);
+		panel2.add(lblMovimientos);
+		panel2.add(lblTiempo);
+		panel2.add(lblFondo);
+
+		btnReiniciar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int restart = JOptionPane.showConfirmDialog(null,
+						"¿Desea reiniciar la partida?", "Warning",
+						JOptionPane.YES_NO_OPTION);
+				if (restart == 0) {
+					// HACER
+
+					frmRompeCabezas.dispose();
+					frmMain.main(null);
+
+				}
+			}
+		});
 
 		frmRompeCabezas.getContentPane().add(panel1);
 
@@ -204,32 +246,6 @@ public class frmMain {
 				frmRompeCabezas.dispose();
 			}
 		});
-
-		frmRompeCabezas.getContentPane().add(panel2);
-
-		lblMovimientos = new JLabel("Movimientos:");
-		lblMovimientos.setBounds(20, 9, 143, 14);
-
-		JLabel lblTiempo = new JLabel("Tiempo:");
-		lblTiempo.setBounds(141, 9, 111, 14);
-
-		JButton btnReiniciar = new JButton("Reiniciar");
-		btnReiniciar.setBounds(276, 5, 100, 23);
-
-		JButton btnAyuda = new JButton("Ayuda");
-		btnAyuda.setBounds(375, 5, 99, 23);
-
-		JLabel lblFondo = new JLabel("");
-		lblFondo.setBounds(0, 35, 484, 480);
-		lblFondo.setIcon(new ImageIcon("img/cuadrado.png"));
-
-		panel2.setBounds(0, 0, 484, 515);
-		panel2.setLayout(null);
-		panel2.add(btnAyuda);
-		panel2.add(btnReiniciar);
-		panel2.add(lblMovimientos);
-		panel2.add(lblTiempo);
-		panel2.add(lblFondo);
 		frmRompeCabezas.getContentPane().add(panel3);
 
 		JPanel pnlOptions = new JPanel();
@@ -318,22 +334,6 @@ public class frmMain {
 			}
 		});
 
-		btnReiniciar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				int restart = JOptionPane.showConfirmDialog(null,
-						"¿Desea reiniciar la partida?", "Warning",
-						JOptionPane.YES_NO_OPTION);
-				if (restart == 0) {
-					// HACER
-
-					frmRompeCabezas.dispose();
-					frmMain.main(null);
-
-				}
-			}
-		});
-
 		setPanelVisible(1);
 
 	}
@@ -347,6 +347,8 @@ public class frmMain {
 			panel4.setVisible(false);
 			break;
 		case 2:
+			@SuppressWarnings("unused")
+			cronometro c = new cronometro();
 			panel1.setVisible(false);
 			panel2.setVisible(true);
 			panel3.setVisible(false);
@@ -407,14 +409,17 @@ public class frmMain {
 					for (int i = 0; i < tbl.size; i++) {
 						for (int j = 0; j < tbl.size; j++) {
 							cuadro[cont].setText(i + "," + j);
-							cuadro[cont].setBorder(LineBorder.createBlackLineBorder());
+							cuadro[cont].setBorder(LineBorder
+									.createBlackLineBorder());
 							cuadro[cont++].setIcon(new ImageIcon("img/" + Style
 									+ "/" + Matriz[i][j] + ".png"));
 						}
 					}
+
 					if (tbl.checkWin()) {
 						lbWin.setIcon(new ImageIcon("img/win.gif"));
-						
+						lblMovimientosFinal.setText(lblMovimientos.getText());
+						lblTiempoFinal.setText(lblTiempo.getText());
 						setPanelVisible(4);
 						playSound("win");
 
@@ -436,4 +441,5 @@ public class frmMain {
 		Sonidos player = new Sonidos();
 		player.play(audioFilePath);
 	}
+
 }
