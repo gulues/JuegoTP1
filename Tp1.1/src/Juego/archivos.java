@@ -8,12 +8,16 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Archivos implements Serializable {
+public class archivos implements Serializable {
+	private static final long serialVersionUID = 1L;
 	public static ArrayList<Jugador> datos = new ArrayList<Jugador>();
-
 	public final static String path = "db.txt";
-	public void guardar() {
+
+	public void guardar(Jugador J) {
 		try {
+			String reemplazoString= new String(J.tiempo);
+			J.tiempo= reemplazoString.replace("Tiempo: ", "");
+			datos.add(J);
 			FileOutputStream fos = new FileOutputStream(path, false);
 			ObjectOutputStream out = new ObjectOutputStream(fos);
 			out.writeObject(datos);
@@ -24,16 +28,12 @@ public class Archivos implements Serializable {
 
 	}
 
-	public static ArrayList<Jugador> listadoJugadores() {
-		abrir();
-		return datos;
-	}
 	@SuppressWarnings("unchecked")
-	public static void abrir() {
+	public  ArrayList<Jugador> abrir() {
 		File f = new File(path);
-		if (!f.exists() && !f.isDirectory()) {
-
-		}
+		if (!f.exists() && !f.isDirectory()) 
+			return null;
+		
 		try {
 
 			FileInputStream fis = new FileInputStream(path);
@@ -45,19 +45,7 @@ public class Archivos implements Serializable {
 		} catch (Exception ex) {
 			// ex.printStackTrace();
 		}
-	}
-
-	
-	private static final long serialVersionUID = 1L;
-	String nombre;
-	String tiempo;
-	int movimientos;
-
-	Archivos(String nombre, String tiempo, int movimientos) {
-		this.nombre = nombre;
-		this.tiempo = tiempo;
-		this.movimientos = movimientos;
-
+		return datos;
 	}
 
 }

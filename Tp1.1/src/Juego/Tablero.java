@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 
+@SuppressWarnings("unused")
 public class Tablero {
 	private int[][] tabla;
 	public int size;
@@ -13,11 +14,11 @@ public class Tablero {
 		tabla = new int[size][size];
 		ArrayList<Integer> cuadrado;
 		cuadrado = new ArrayList<Integer>(size);
-		for (int i = 1; i < size * size; i++)
+		for (int i =0; i < size * size; i++)
 			cuadrado.add(i);
 
-		//Collections.shuffle(cuadrado);
-		cuadrado.add(0);
+	   Collections.shuffle(cuadrado);
+		//cuadrado.add(0);
 		int cont = 0;
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {

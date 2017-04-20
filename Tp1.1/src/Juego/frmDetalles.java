@@ -11,6 +11,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class frmDetalles extends JDialog {
 	private JTable tblJugadores;
@@ -27,35 +29,43 @@ public class frmDetalles extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+
 		
-		refreshTable(Archivos.datos);
-		
-		tblJugadores = new JTable(modeloJugadores);
-		tblJugadores.setFillsViewportHeight(true);
-		scrollTblJugadores.setViewportView(tblJugadores);
 		modeloJugadores = new DefaultTableModel();
 		modeloJugadores.addColumn("Nombre Jugador");
 		modeloJugadores.addColumn("Tiempo");
 		modeloJugadores.addColumn("Movimientos");
+		tblJugadores = new JTable(modeloJugadores);
+		tblJugadores.setFillsViewportHeight(true);
+		scrollTblJugadores.setViewportView(tblJugadores);
+		ArrayList<Jugador>lista= new ArrayList<Jugador>();
+		archivos ar = new archivos();
+		ar.abrir();
+		lista= archivos.datos;
+		refreshTable(lista);
+		getContentPane().add(scrollTblJugadores);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				JButton okButton = new JButton("Aceptar");
+				okButton.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+					dispose();
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
 		}
 	}
+
 	public static void refreshTable(ArrayList<Jugador> listadoJugadores) {
-		if (listadoJugadores.isEmpty()) return;
+		if (listadoJugadores.isEmpty())
+			return;
 		// Cargar modelo de jugadores
 		for (int i = 0; i < modeloJugadores.getRowCount(); i++) {
 			modeloJugadores.removeRow(i);
@@ -66,9 +76,9 @@ public class frmDetalles extends JDialog {
 		for (Jugador j : listadoJugadores) {
 			arreglo[0] = j.nombre;
 			arreglo[1] = j.tiempo;
-			arreglo[2] = j.movimientos;
+			arreglo[2] = j.movimientos +"";
 			modeloJugadores.addRow(arreglo);
 		}
-		
+
 	}
 }
