@@ -83,133 +83,133 @@ public class frmMain {
 		}
 		setPanelVisible(0);
 		ButtonGroup bg = new ButtonGroup();
-		
-				frmRompeCabezas.getContentPane().add(panel3);
-				
-						JPanel pnlOptions = new JPanel();
-						pnlOptions.setOpaque(false);
-						pnlOptions.setBounds(81, 27, 316, 86);
-						pnlOptions.setLayout(null);
-						
-								JRadioButton rdbtnImagenGato = new JRadioButton("Imagen Gato");
-								rdbtnImagenGato.setForeground(Color.WHITE);
-								JRadioButton rdbtnImagenPerro = new JRadioButton("Imagen Perro");
-								rdbtnImagenPerro.setForeground(Color.WHITE);
-								JRadioButton rdbtnNumeros = new JRadioButton("Numeros");
-								rdbtnNumeros.setForeground(Color.WHITE);
-								
-										// option Perro,
-										rdbtnImagenPerro.setBounds(54, 60, 230, 23);
-										pnlOptions.add(rdbtnImagenPerro);
-										rdbtnImagenPerro.addItemListener(new ItemListener() {
-											public void itemStateChanged(ItemEvent e) {
-												changeImagePreview("dog");
-											}
-										});
-										
-												rdbtnImagenGato.setBounds(54, 30, 230, 23);
-												pnlOptions.add(rdbtnImagenGato);
-												rdbtnImagenGato.addItemListener(new ItemListener() {
-													public void itemStateChanged(ItemEvent e) {
-														changeImagePreview("cat");
-													}
-												});
-												
-														rdbtnNumeros.setBounds(54, 0, 230, 23);
-														pnlOptions.add(rdbtnNumeros);
-														rdbtnNumeros.addItemListener(new ItemListener() {
-															public void itemStateChanged(ItemEvent arg0) {
-																changeImagePreview("numbers");
 
-															}
-														});
-														
-																// Default estilo (Numerico)
-																rdbtnNumeros.setSelected(true);
-																lblPreview.setBorder(new LineBorder(new Color(0, 0, 0)));
-																lblPreview.setText("numbers");
-																bg.add(rdbtnNumeros);
-																bg.add(rdbtnImagenPerro);
-																bg.add(rdbtnImagenGato);
-																
-																		JLabel lblSeleccioneLaImagen = new JLabel("Tipo de juego:");
-																		lblSeleccioneLaImagen.setForeground(Color.WHITE);
-																		lblSeleccioneLaImagen.setBounds(81, 0, 178, 23);
-																		
-																				lblPreview.setOpaque(true);
-																				lblPreview.setBounds(118, 165, 250, 250);
-																				lblPreview.setIcon(new ImageIcon("img/numbers/preview.png"));
-																				
-																						JLabel lblVistaPrevia = new JLabel("Vista Previa");
-																						lblVistaPrevia.setForeground(Color.WHITE);
-																						lblVistaPrevia.setBounds(81, 131, 178, 23);
-																						
-																								JButton btnAceptar = new JButton("Aceptar");
-																								btnAceptar.setBounds(81, 453, 142, 51);
-																								btnAceptar.addActionListener(new ActionListener() {
-																									public void actionPerformed(ActionEvent e) {
-																										setPanelVisible(1);
-																									}
-																								});
-																								
-																										JButton btnVolver = new JButton("Volver");
-																										btnVolver.setBounds(255, 453, 142, 51);
-																										btnVolver.addActionListener(new ActionListener() {
-																											public void actionPerformed(ActionEvent e) {
-																												setPanelVisible(1);
-																											}
-																										});
-																										
-																												JLabel lblFondo3 = new JLabel("");
-																												lblFondo3.setBounds(0, 0, 485, 515);
-																												lblFondo3.setIcon(new ImageIcon("img/background.png"));
-																												panel3.setBounds(0, 0, 485, 515);
-																												panel3.setLayout(null);
-																												panel3.add(btnAceptar);
-																												panel3.add(btnVolver);
-																												panel3.add(lblVistaPrevia);
-																												panel3.add(lblPreview);
-																												panel3.add(pnlOptions);
-																												panel3.add(lblSeleccioneLaImagen);
-																												panel3.add(lblFondo3);
+		frmRompeCabezas.getContentPane().add(panel3);
+
+		JPanel pnlOptions = new JPanel();
+		pnlOptions.setOpaque(false);
+		pnlOptions.setBounds(81, 27, 316, 86);
+		pnlOptions.setLayout(null);
+
+		JRadioButton rdbtnImagenGato = new JRadioButton("Imagen Gato");
+		rdbtnImagenGato.setForeground(Color.WHITE);
+		JRadioButton rdbtnImagenPerro = new JRadioButton("Imagen Perro");
+		rdbtnImagenPerro.setForeground(Color.WHITE);
+		JRadioButton rdbtnNumeros = new JRadioButton("Numeros");
+		rdbtnNumeros.setForeground(Color.WHITE);
+
+		// option Perro,
+		rdbtnImagenPerro.setBounds(54, 60, 230, 23);
+		pnlOptions.add(rdbtnImagenPerro);
+		rdbtnImagenPerro.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				changeImagePreview("dog");
+			}
+		});
+
+		rdbtnImagenGato.setBounds(54, 30, 230, 23);
+		pnlOptions.add(rdbtnImagenGato);
+		rdbtnImagenGato.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				changeImagePreview("cat");
+			}
+		});
+
+		rdbtnNumeros.setBounds(54, 0, 230, 23);
+		pnlOptions.add(rdbtnNumeros);
+		rdbtnNumeros.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				changeImagePreview("numbers");
+
+			}
+		});
+
+		// Default estilo (Numerico)
+		rdbtnNumeros.setSelected(true);
+		lblPreview.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblPreview.setText("numbers");
+		bg.add(rdbtnNumeros);
+		bg.add(rdbtnImagenPerro);
+		bg.add(rdbtnImagenGato);
+
+		JLabel lblSeleccioneLaImagen = new JLabel("Tipo de juego:");
+		lblSeleccioneLaImagen.setForeground(Color.WHITE);
+		lblSeleccioneLaImagen.setBounds(81, 0, 178, 23);
+
+		lblPreview.setOpaque(true);
+		lblPreview.setBounds(118, 165, 250, 250);
+		lblPreview.setIcon(new ImageIcon("img/numbers/preview.png"));
+
+		JLabel lblVistaPrevia = new JLabel("Vista Previa");
+		lblVistaPrevia.setForeground(Color.WHITE);
+		lblVistaPrevia.setBounds(81, 131, 178, 23);
+
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.setBounds(81, 453, 142, 51);
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setPanelVisible(1);
+			}
+		});
+
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setBounds(255, 453, 142, 51);
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setPanelVisible(1);
+			}
+		});
+
+		JLabel lblFondo3 = new JLabel("");
+		lblFondo3.setBounds(0, 0, 485, 515);
+		lblFondo3.setIcon(new ImageIcon("img/background.png"));
+		panel3.setBounds(0, 0, 485, 515);
+		panel3.setLayout(null);
+		panel3.add(btnAceptar);
+		panel3.add(btnVolver);
+		panel3.add(lblVistaPrevia);
+		panel3.add(lblPreview);
+		panel3.add(pnlOptions);
+		panel3.add(lblSeleccioneLaImagen);
+		panel3.add(lblFondo3);
 		frmRompeCabezas.getContentPane().add(panel2);
-		
-				lblMovimientos = new JLabel("Movimientos:");
-				lblMovimientos.setFont(new Font("Tahoma", Font.BOLD, 11));
-				lblMovimientos.setBounds(20, 9, 119, 14);
-				lblTiempo.setFont(new Font("Tahoma", Font.BOLD, 11));
-				lblTiempo.setBounds(141, 9, 111, 14);
-				
-						JButton btnReiniciar = new JButton("Menu Principal");
-						btnReiniciar.setBounds(276, 5, 149, 23);
-						
-								JLabel lblFondo = new JLabel("");
-								lblFondo.setBounds(0, 35, 484, 480);
-								lblFondo.setIcon(new ImageIcon("img/cuadrado.png"));
-								
-										panel2.setBounds(0, 0, 484, 515);
-										panel2.setLayout(null);
-										panel2.add(btnReiniciar);
-										panel2.add(lblMovimientos);
-										panel2.add(lblTiempo);
-										panel2.add(lblFondo);
-										
-												btnReiniciar.addMouseListener(new MouseAdapter() {
-													@Override
-													public void mouseClicked(MouseEvent arg0) {
-														int restart = JOptionPane.showConfirmDialog(null,
-																"¿Desea reiniciar la partida?", "Warning",
-																JOptionPane.YES_NO_OPTION);
-														if (restart == 0) {
-										
-															frmRompeCabezas.dispose();
-															crono.setCero(true);
-															frmMain nuevoFrm = new frmMain();
-															nuevoFrm.frmRompeCabezas.setVisible(true);
-										
-														}
-													}
-												});
+
+		lblMovimientos = new JLabel("Movimientos:");
+		lblMovimientos.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblMovimientos.setBounds(20, 9, 119, 14);
+		lblTiempo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblTiempo.setBounds(141, 9, 111, 14);
+
+		JButton btnReiniciar = new JButton("Menu Principal");
+		btnReiniciar.setBounds(276, 5, 149, 23);
+
+		JLabel lblFondo = new JLabel("");
+		lblFondo.setBounds(0, 35, 484, 480);
+		lblFondo.setIcon(new ImageIcon("img/cuadrado.png"));
+
+		panel2.setBounds(0, 0, 484, 515);
+		panel2.setLayout(null);
+		panel2.add(btnReiniciar);
+		panel2.add(lblMovimientos);
+		panel2.add(lblTiempo);
+		panel2.add(lblFondo);
+
+		btnReiniciar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int restart = JOptionPane.showConfirmDialog(null,
+						"¿Desea reiniciar la partida?", "Warning",
+						JOptionPane.YES_NO_OPTION);
+				if (restart == 0) {
+
+					frmRompeCabezas.dispose();
+					crono.setCero(true);
+					frmMain nuevoFrm = new frmMain();
+					nuevoFrm.frmRompeCabezas.setVisible(true);
+
+				}
+			}
+		});
 
 		frmRompeCabezas.getContentPane().add(panel1);
 

@@ -9,7 +9,8 @@ public class cronometro implements Runnable {
 		crono = new Thread(this);
 		crono.start();
 	}
-	//para restablecer el cronometro a cero
+
+	// para restablecer el cronometro a cero
 	public void setCero(boolean b) {
 		cero = b;
 	}

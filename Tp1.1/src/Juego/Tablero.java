@@ -11,7 +11,8 @@ public class Tablero {
 	public Tablero(int size) {
 		this.size = size;
 		tabla = new int[size][size];
-		//Lista de numeros del 0-15 usados con el metodo Colllections.suffle para establecer los cuadrados aleatoriamente
+		// Lista de numeros del 0-15 usados con el metodo Colllections.suffle
+		// para establecer los cuadrados aleatoriamente
 		ArrayList<Integer> cuadrado;
 		cuadrado = new ArrayList<Integer>(size);
 		for (int i = 0; i < size * size; i++)

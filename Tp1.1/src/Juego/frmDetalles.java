@@ -45,8 +45,7 @@ public class frmDetalles extends JDialog {
 		ordenar or = new ordenar(lista);
 		or.ordenarMov();
 		refreshTable(lista);
-		
-		
+
 		getContentPane().add(scrollTblJugadores);
 		{
 			JPanel buttonPane = new JPanel();
