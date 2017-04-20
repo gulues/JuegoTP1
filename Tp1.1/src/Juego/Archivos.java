@@ -12,7 +12,6 @@ public class Archivos implements Serializable {
 	public static ArrayList<Jugador> datos = new ArrayList<Jugador>();
 
 	public final static String path = "db.txt";
-
 	public void guardar() {
 		try {
 			FileOutputStream fos = new FileOutputStream(path, false);
@@ -25,6 +24,10 @@ public class Archivos implements Serializable {
 
 	}
 
+	public static ArrayList<Jugador> listadoJugadores() {
+		abrir();
+		return datos;
+	}
 	@SuppressWarnings("unchecked")
 	public static void abrir() {
 		File f = new File(path);
@@ -44,14 +47,7 @@ public class Archivos implements Serializable {
 		}
 	}
 
-	public static ArrayList<Jugador> listadoJugadores() {
-		abrir();
-		return datos;
-	}
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	String nombre;
 	String tiempo;

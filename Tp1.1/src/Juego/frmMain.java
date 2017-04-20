@@ -48,7 +48,7 @@ public class frmMain {
 	private JTextField txtNombre;
 	public static JLabel lblTiempo = new JLabel("Tiempo:");
 	private JLabel lblMovimientosFinal;
-	private JLabel lblTiempoFinal;
+	private JLabel lblTiempoFinal = new JLabel("Tiempo:");
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -81,76 +81,68 @@ public class frmMain {
 		setPanelVisible(0);
 		ButtonGroup bg = new ButtonGroup();
 
-		panel4.setBounds(0, 0, 484, 515);
-		frmRompeCabezas.getContentPane().add(panel4);
-		panel4.setLayout(null);
+		frmRompeCabezas.getContentPane().add(panel1);
 
-		JButton btnVolverAJugar = new JButton("Volver a Jugar");
+		JLabel lblPuzzle = new JLabel("PUZZLE");
+		lblPuzzle.setBounds(0, 0, 485, 46);
 
-		btnVolverAJugar.addMouseListener(new MouseAdapter() {
+		lblPuzzle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPuzzle.setForeground(Color.ORANGE);
+		lblPuzzle.setFont(new Font("Tahoma", Font.PLAIN, 22));
+
+		JButton btnConfig = new JButton("Configuraci\u00F3n");
+		btnConfig.setBounds(173, 167, 165, 50);
+
+		panel1.setBounds(0, 0, 484, 515);
+		panel1.setLayout(null);
+
+		JButton btnJugar = new JButton("Jugar");
+		btnJugar.setBounds(173, 95, 165, 50);
+
+		JButton btnLogros = new JButton("Logros");
+		btnLogros.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseClicked(MouseEvent arg0) {
+				frmDetalles fDetalles = new frmDetalles();
+				fDetalles.setLocationRelativeTo(null);
+				fDetalles.setVisible(true);
+			}
 
-				Archivos file = new Archivos(txtNombre.getText(), lblTiempo
-						.getText(), movimientos);
-				file.guardar();
+		});
+		btnLogros.setBounds(173, 239, 165, 42);
 
-				frmRompeCabezas.dispose();
-				frmMain.main(null);
+		JButton btnSalir = new JButton("Salir");
+		btnSalir.setBounds(173, 375, 165, 50);
+
+		panel1.add(btnJugar);
+		panel1.add(btnConfig);
+		panel1.add(btnLogros);
+		panel1.add(btnSalir);
+		panel1.add(lblPuzzle);
+
+		JLabel lblFondo1 = new JLabel("");
+		lblFondo1.setBounds(0, 0, 485, 515);
+		lblFondo1.setIcon(new ImageIcon("img/background.png"));
+		panel1.add(lblFondo1);
+
+		btnJugar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tbl = new Tablero(4);
+				crearCuadros(lblPreview.getText());
+				setPanelVisible(2);
 			}
 		});
-		btnVolverAJugar.setBounds(78, 458, 126, 46);
-		panel4.add(btnVolverAJugar);
 
-		JButton btnEnd = new JButton("Salir");
-		btnEnd.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+		btnConfig.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setPanelVisible(3);
+			}
+		});
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				frmRompeCabezas.dispose();
 			}
 		});
-		btnEnd.setBounds(242, 458, 126, 46);
-		panel4.add(btnEnd);
-
-		txtNombre = new JTextField();
-		txtNombre.setBounds(133, 413, 182, 28);
-		panel4.add(txtNombre);
-		txtNombre.setColumns(10);
-
-		JLabel lblEscribeTuNombre = new JLabel(
-				"Escribe tu nombre para guardar tu puntuaci\u00F3n: ");
-		lblEscribeTuNombre.setForeground(Color.WHITE);
-		lblEscribeTuNombre.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEscribeTuNombre.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblEscribeTuNombre.setBounds(0, 388, 485, 14);
-		panel4.add(lblEscribeTuNombre);
-
-		JLabel lblFelicitaciones = new JLabel("FELICITACIONES!!!");
-		lblFelicitaciones.setFont(new Font("Tahoma", Font.BOLD, 26));
-		lblFelicitaciones.setBounds(110, 163, 252, 36);
-		panel4.add(lblFelicitaciones);
-
-		JLabel lblTiempoFinal_1 = new JLabel("TIEMPO:");
-		lblTiempoFinal_1.setForeground(Color.WHITE);
-		lblTiempoFinal_1.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblTiempoFinal_1.setBounds(79, 330, 271, 14);
-		panel4.add(lblTiempoFinal_1);
-
-		lblMovimientosFinal = new JLabel("MOVIMIENTOS:");
-		lblMovimientosFinal.setForeground(Color.WHITE);
-		lblMovimientosFinal.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblMovimientosFinal.setBounds(78, 355, 333, 14);
-		panel4.add(lblMovimientosFinal);
-
-		lbWin.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lbWin.setBounds(new Rectangle(41, 0, 400, 323));
-
-		panel4.add(lbWin);
-
-		JLabel lblFondoWin = new JLabel("");
-		lblFondoWin.setBounds(0, 0, 485, 515);
-		lblFondoWin.setIcon(new ImageIcon("img/background.png"));
-		panel4.add(lblFondoWin);
 
 		frmRompeCabezas.getContentPane().add(panel2);
 
@@ -190,60 +182,6 @@ public class frmMain {
 					frmMain.main(null);
 
 				}
-			}
-		});
-
-		frmRompeCabezas.getContentPane().add(panel1);
-
-		JLabel lblPuzzle = new JLabel("PUZZLE");
-		lblPuzzle.setBounds(0, 0, 485, 46);
-
-		lblPuzzle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPuzzle.setForeground(Color.ORANGE);
-		lblPuzzle.setFont(new Font("Tahoma", Font.PLAIN, 22));
-
-		JButton btnConfig = new JButton("Configuraci\u00F3n");
-		btnConfig.setBounds(173, 167, 165, 50);
-
-		panel1.setBounds(0, 0, 484, 515);
-		panel1.setLayout(null);
-
-		JButton btnJugar = new JButton("Jugar");
-		btnJugar.setBounds(173, 95, 165, 50);
-
-		JButton btnLogros = new JButton("Logros");
-		btnLogros.setBounds(173, 239, 165, 42);
-
-		JButton btnSalir = new JButton("Salir");
-		btnSalir.setBounds(173, 375, 165, 50);
-
-		panel1.add(btnJugar);
-		panel1.add(btnConfig);
-		panel1.add(btnLogros);
-		panel1.add(btnSalir);
-		panel1.add(lblPuzzle);
-
-		JLabel lblFondo1 = new JLabel("");
-		lblFondo1.setBounds(0, 0, 485, 515);
-		lblFondo1.setIcon(new ImageIcon("img/background.png"));
-		panel1.add(lblFondo1);
-
-		btnJugar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				tbl = new Tablero(4);
-				crearCuadros(lblPreview.getText());
-				setPanelVisible(2);
-			}
-		});
-
-		btnConfig.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setPanelVisible(3);
-			}
-		});
-		btnSalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frmRompeCabezas.dispose();
 			}
 		});
 		frmRompeCabezas.getContentPane().add(panel3);
@@ -333,6 +271,76 @@ public class frmMain {
 				changeImagePreview("dog");
 			}
 		});
+
+		panel4.setBounds(0, 0, 484, 515);
+		frmRompeCabezas.getContentPane().add(panel4);
+		panel4.setLayout(null);
+
+		JButton btnVolverAJugar = new JButton("Volver a Jugar");
+
+		btnVolverAJugar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				Archivos file = new Archivos(txtNombre.getText(), lblTiempo
+						.getText(), movimientos);
+				file.guardar();
+
+				frmRompeCabezas.dispose();
+				frmMain.main(null);
+			}
+		});
+		btnVolverAJugar.setBounds(78, 458, 126, 46);
+		panel4.add(btnVolverAJugar);
+
+		JButton btnEnd = new JButton("Salir");
+		btnEnd.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frmRompeCabezas.dispose();
+			}
+		});
+		btnEnd.setBounds(242, 458, 126, 46);
+		panel4.add(btnEnd);
+
+		txtNombre = new JTextField();
+		txtNombre.setBounds(133, 413, 182, 28);
+		panel4.add(txtNombre);
+		txtNombre.setColumns(10);
+
+		JLabel lblEscribeTuNombre = new JLabel(
+				"Escribe tu nombre para guardar tu puntuaci\u00F3n: ");
+		lblEscribeTuNombre.setForeground(Color.WHITE);
+		lblEscribeTuNombre.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEscribeTuNombre.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblEscribeTuNombre.setBounds(0, 388, 485, 14);
+		panel4.add(lblEscribeTuNombre);
+
+		JLabel lblFelicitaciones = new JLabel("FELICITACIONES!!!");
+		lblFelicitaciones.setFont(new Font("Tahoma", Font.BOLD, 26));
+		lblFelicitaciones.setBounds(110, 163, 252, 36);
+		panel4.add(lblFelicitaciones);
+
+		lblTiempoFinal.setForeground(Color.WHITE);
+		lblTiempoFinal.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblTiempoFinal.setBounds(79, 330, 271, 14);
+		panel4.add(lblTiempoFinal);
+
+		lblMovimientosFinal = new JLabel("MOVIMIENTOS:");
+		lblMovimientosFinal.setForeground(Color.WHITE);
+		lblMovimientosFinal.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblMovimientosFinal.setBounds(78, 355, 333, 14);
+		panel4.add(lblMovimientosFinal);
+
+		lbWin.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lbWin.setBounds(new Rectangle(41, 0, 400, 323));
+
+		panel4.add(lbWin);
+
+		JLabel lblFondoWin = new JLabel("");
+		lblFondoWin.setBounds(0, 0, 485, 515);
+		lblFondoWin.setIcon(new ImageIcon("img/background.png"));
+		panel4.add(lblFondoWin);
 
 		setPanelVisible(1);
 

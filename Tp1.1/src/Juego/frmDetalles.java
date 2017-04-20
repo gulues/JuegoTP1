@@ -18,25 +18,18 @@ public class frmDetalles extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 
-
-	public static void main(String[] args) {
-		try {
-			frmDetalles dialog = new frmDetalles();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	public frmDetalles() {
-		
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setLocationRelativeTo(null);
 		JScrollPane scrollTblJugadores = new JScrollPane();
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+		
+		refreshTable(Archivos.datos);
+		
 		tblJugadores = new JTable(modeloJugadores);
 		tblJugadores.setFillsViewportHeight(true);
 		scrollTblJugadores.setViewportView(tblJugadores);
@@ -62,6 +55,7 @@ public class frmDetalles extends JDialog {
 		}
 	}
 	public static void refreshTable(ArrayList<Jugador> listadoJugadores) {
+		if (listadoJugadores.isEmpty()) return;
 		// Cargar modelo de jugadores
 		for (int i = 0; i < modeloJugadores.getRowCount(); i++) {
 			modeloJugadores.removeRow(i);
