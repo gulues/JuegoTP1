@@ -13,10 +13,13 @@ public class archivos implements Serializable {
 	public static ArrayList<Jugador> datos = new ArrayList<Jugador>();
 	public final static String path = "db.txt";
 
+	// se guardan el objeto jugador actual en archivo, y se remplaza la variable
+	// "Tiempo: hh:mm:ss" por "hh:mm:ss" de jugador.tiempo
+
 	public void guardar(Jugador J) {
 		try {
-			String reemplazoString= new String(J.tiempo);
-			J.tiempo= reemplazoString.replace("Tiempo: ", "");
+			String reemplazoString = new String(J.tiempo);
+			J.tiempo = reemplazoString.replace("Tiempo: ", "");
 			datos.add(J);
 			FileOutputStream fos = new FileOutputStream(path, false);
 			ObjectOutputStream out = new ObjectOutputStream(fos);
@@ -29,11 +32,11 @@ public class archivos implements Serializable {
 	}
 
 	@SuppressWarnings("unchecked")
-	public  ArrayList<Jugador> abrir() {
+	public ArrayList<Jugador> abrir() {
 		File f = new File(path);
-		if (!f.exists() && !f.isDirectory()) 
+		if (!f.exists() && !f.isDirectory())
 			return null;
-		
+
 		try {
 
 			FileInputStream fis = new FileInputStream(path);

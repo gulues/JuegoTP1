@@ -30,7 +30,6 @@ public class frmDetalles extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
-		
 		modeloJugadores = new DefaultTableModel();
 		modeloJugadores.addColumn("Nombre Jugador");
 		modeloJugadores.addColumn("Tiempo");
@@ -38,11 +37,16 @@ public class frmDetalles extends JDialog {
 		tblJugadores = new JTable(modeloJugadores);
 		tblJugadores.setFillsViewportHeight(true);
 		scrollTblJugadores.setViewportView(tblJugadores);
-		ArrayList<Jugador>lista= new ArrayList<Jugador>();
+
+		ArrayList<Jugador> lista = new ArrayList<Jugador>();
 		archivos ar = new archivos();
 		ar.abrir();
-		lista= archivos.datos;
+		lista = archivos.datos;
+		ordenar or = new ordenar(lista);
+		or.ordenarMov();
 		refreshTable(lista);
+		
+		
 		getContentPane().add(scrollTblJugadores);
 		{
 			JPanel buttonPane = new JPanel();
@@ -53,7 +57,7 @@ public class frmDetalles extends JDialog {
 				okButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent arg0) {
-					dispose();
+						dispose();
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -76,7 +80,7 @@ public class frmDetalles extends JDialog {
 		for (Jugador j : listadoJugadores) {
 			arreglo[0] = j.nombre;
 			arreglo[1] = j.tiempo;
-			arreglo[2] = j.movimientos +"";
+			arreglo[2] = j.movimientos + "";
 			modeloJugadores.addRow(arreglo);
 		}
 

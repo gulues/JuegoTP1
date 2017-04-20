@@ -1,20 +1,22 @@
 package Juego;
 
 public class cronometro implements Runnable {
-
+	public static boolean cero;
+	int minutos = 0, segundos = 0, horas = 0;
 	Thread crono;
 
-	/** Creates new form cronometro */
 	public cronometro() {
 		crono = new Thread(this);
 		crono.start();
 	}
+	//para restablecer el cronometro a cero
+	public void setCero(boolean b) {
+		cero = b;
+	}
 
-	int minutos = 0, segundos = 0, horas = 0;
-	String hs0 = "0", min0 = "0", seg0 = "0";
-
-	@SuppressWarnings("static-access")
 	public void run() {
+
+		String hs0 = "0", min0 = "0", seg0 = "0";
 		try {
 			while (true) {
 				if (segundos == 59) {
@@ -39,10 +41,15 @@ public class cronometro implements Runnable {
 					seg0 = "0";
 				else
 					seg0 = "";
+				if (cero) {
+					minutos = 0;
+					segundos = 0;
+					horas = 0;
+				}
 
 				frmMain.lblTiempo.setText("Tiempo: " + hs0 + horas + ":" + min0
 						+ minutos + ":" + seg0 + segundos);
-				crono.sleep(1000);
+				Thread.sleep(1000);
 			}
 		} catch (InterruptedException e) {
 			System.out.println(e.getMessage());

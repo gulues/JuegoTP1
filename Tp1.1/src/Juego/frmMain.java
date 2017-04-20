@@ -31,6 +31,8 @@ import java.awt.event.ItemEvent;
 import java.awt.Rectangle;
 
 import javax.swing.JTextField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class frmMain {
 	private int[][] Matriz;
@@ -49,6 +51,7 @@ public class frmMain {
 	public static JLabel lblTiempo = new JLabel("Tiempo:");
 	private JLabel lblMovimientosFinal;
 	private JLabel lblTiempoFinal = new JLabel("Tiempo:");
+	private cronometro crono = new cronometro();
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -80,65 +83,163 @@ public class frmMain {
 		}
 		setPanelVisible(0);
 		ButtonGroup bg = new ButtonGroup();
+		
+				frmRompeCabezas.getContentPane().add(panel3);
+				
+						JPanel pnlOptions = new JPanel();
+						pnlOptions.setOpaque(false);
+						pnlOptions.setBounds(81, 27, 316, 86);
+						pnlOptions.setLayout(null);
+						
+								JRadioButton rdbtnImagenGato = new JRadioButton("Imagen Gato");
+								rdbtnImagenGato.setForeground(Color.WHITE);
+								JRadioButton rdbtnImagenPerro = new JRadioButton("Imagen Perro");
+								rdbtnImagenPerro.setForeground(Color.WHITE);
+								JRadioButton rdbtnNumeros = new JRadioButton("Numeros");
+								rdbtnNumeros.setForeground(Color.WHITE);
+								
+										// option Perro,
+										rdbtnImagenPerro.setBounds(54, 60, 230, 23);
+										pnlOptions.add(rdbtnImagenPerro);
+										rdbtnImagenPerro.addItemListener(new ItemListener() {
+											public void itemStateChanged(ItemEvent e) {
+												changeImagePreview("dog");
+											}
+										});
+										
+												rdbtnImagenGato.setBounds(54, 30, 230, 23);
+												pnlOptions.add(rdbtnImagenGato);
+												rdbtnImagenGato.addItemListener(new ItemListener() {
+													public void itemStateChanged(ItemEvent e) {
+														changeImagePreview("cat");
+													}
+												});
+												
+														rdbtnNumeros.setBounds(54, 0, 230, 23);
+														pnlOptions.add(rdbtnNumeros);
+														rdbtnNumeros.addItemListener(new ItemListener() {
+															public void itemStateChanged(ItemEvent arg0) {
+																changeImagePreview("numbers");
+
+															}
+														});
+														
+																// Default estilo (Numerico)
+																rdbtnNumeros.setSelected(true);
+																lblPreview.setBorder(new LineBorder(new Color(0, 0, 0)));
+																lblPreview.setText("numbers");
+																bg.add(rdbtnNumeros);
+																bg.add(rdbtnImagenPerro);
+																bg.add(rdbtnImagenGato);
+																
+																		JLabel lblSeleccioneLaImagen = new JLabel("Tipo de juego:");
+																		lblSeleccioneLaImagen.setForeground(Color.WHITE);
+																		lblSeleccioneLaImagen.setBounds(81, 0, 178, 23);
+																		
+																				lblPreview.setOpaque(true);
+																				lblPreview.setBounds(118, 165, 250, 250);
+																				lblPreview.setIcon(new ImageIcon("img/numbers/preview.png"));
+																				
+																						JLabel lblVistaPrevia = new JLabel("Vista Previa");
+																						lblVistaPrevia.setForeground(Color.WHITE);
+																						lblVistaPrevia.setBounds(81, 131, 178, 23);
+																						
+																								JButton btnAceptar = new JButton("Aceptar");
+																								btnAceptar.setBounds(81, 453, 142, 51);
+																								btnAceptar.addActionListener(new ActionListener() {
+																									public void actionPerformed(ActionEvent e) {
+																										setPanelVisible(1);
+																									}
+																								});
+																								
+																										JButton btnVolver = new JButton("Volver");
+																										btnVolver.setBounds(255, 453, 142, 51);
+																										btnVolver.addActionListener(new ActionListener() {
+																											public void actionPerformed(ActionEvent e) {
+																												setPanelVisible(1);
+																											}
+																										});
+																										
+																												JLabel lblFondo3 = new JLabel("");
+																												lblFondo3.setBounds(0, 0, 485, 515);
+																												lblFondo3.setIcon(new ImageIcon("img/background.png"));
+																												panel3.setBounds(0, 0, 485, 515);
+																												panel3.setLayout(null);
+																												panel3.add(btnAceptar);
+																												panel3.add(btnVolver);
+																												panel3.add(lblVistaPrevia);
+																												panel3.add(lblPreview);
+																												panel3.add(pnlOptions);
+																												panel3.add(lblSeleccioneLaImagen);
+																												panel3.add(lblFondo3);
 		frmRompeCabezas.getContentPane().add(panel2);
-
-		lblMovimientos = new JLabel("Movimientos:");
-		lblMovimientos.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblMovimientos.setBounds(20, 9, 119, 14);
-		lblTiempo.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblTiempo.setBounds(141, 9, 111, 14);
-
-		JButton btnReiniciar = new JButton("Menu Principal");
-		btnReiniciar.setBounds(276, 5, 100, 23);
-
-		JButton btnAyuda = new JButton("Ayuda");
-		btnAyuda.setBounds(386, 5, 99, 23);
-
-		JLabel lblFondo = new JLabel("");
-		lblFondo.setBounds(0, 35, 484, 480);
-		lblFondo.setIcon(new ImageIcon("img/cuadrado.png"));
-
-		panel2.setBounds(0, 0, 484, 515);
-		panel2.setLayout(null);
-		panel2.add(btnAyuda);
-		panel2.add(btnReiniciar);
-		panel2.add(lblMovimientos);
-		panel2.add(lblTiempo);
-		panel2.add(lblFondo);
-
-		btnReiniciar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				int restart = JOptionPane.showConfirmDialog(null,
-						"¿Desea reiniciar la partida?", "Warning",
-						JOptionPane.YES_NO_OPTION);
-				if (restart == 0) {
-					// HACER
-
-					frmRompeCabezas.dispose();
-					frmMain.main(null);
-
-				}
-			}
-		});
+		
+				lblMovimientos = new JLabel("Movimientos:");
+				lblMovimientos.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblMovimientos.setBounds(20, 9, 119, 14);
+				lblTiempo.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblTiempo.setBounds(141, 9, 111, 14);
+				
+						JButton btnReiniciar = new JButton("Menu Principal");
+						btnReiniciar.setBounds(276, 5, 149, 23);
+						
+								JLabel lblFondo = new JLabel("");
+								lblFondo.setBounds(0, 35, 484, 480);
+								lblFondo.setIcon(new ImageIcon("img/cuadrado.png"));
+								
+										panel2.setBounds(0, 0, 484, 515);
+										panel2.setLayout(null);
+										panel2.add(btnReiniciar);
+										panel2.add(lblMovimientos);
+										panel2.add(lblTiempo);
+										panel2.add(lblFondo);
+										
+												btnReiniciar.addMouseListener(new MouseAdapter() {
+													@Override
+													public void mouseClicked(MouseEvent arg0) {
+														int restart = JOptionPane.showConfirmDialog(null,
+																"¿Desea reiniciar la partida?", "Warning",
+																JOptionPane.YES_NO_OPTION);
+														if (restart == 0) {
+										
+															frmRompeCabezas.dispose();
+															crono.setCero(true);
+															frmMain nuevoFrm = new frmMain();
+															nuevoFrm.frmRompeCabezas.setVisible(true);
+										
+														}
+													}
+												});
 
 		frmRompeCabezas.getContentPane().add(panel1);
 
-		JLabel lblPuzzle = new JLabel("PUZZLE");
+		JLabel lblPuzzle = new JLabel("PUZZLE TP Prog III");
 		lblPuzzle.setBounds(0, 0, 485, 46);
 
 		lblPuzzle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPuzzle.setForeground(Color.ORANGE);
-		lblPuzzle.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblPuzzle.setForeground(Color.YELLOW);
+		lblPuzzle.setFont(new Font("Tahoma", Font.PLAIN, 30));
 
 		JButton btnConfig = new JButton("Configuraci\u00F3n");
 		btnConfig.setBounds(173, 167, 165, 50);
+		btnConfig.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setPanelVisible(3);
+			}
+		});
 
 		panel1.setBounds(0, 0, 484, 515);
 		panel1.setLayout(null);
 
 		JButton btnJugar = new JButton("Jugar");
 		btnJugar.setBounds(173, 95, 165, 50);
+		btnJugar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tbl = new Tablero(4);
+				crearCuadros(lblPreview.getText());
+				setPanelVisible(2);
+			}
+		});
 
 		JButton btnLogros = new JButton("Logros");
 		btnLogros.setBounds(173, 239, 165, 42);
@@ -152,14 +253,18 @@ public class frmMain {
 
 		});
 
-
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.setBounds(173, 375, 165, 50);
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 
 		JLabel lblFondo1 = new JLabel("");
 		lblFondo1.setBounds(0, 0, 485, 515);
 		lblFondo1.setIcon(new ImageIcon("img/background.png"));
-		
+
 		panel1.add(btnJugar);
 		panel1.add(btnConfig);
 		panel1.add(btnLogros);
@@ -167,119 +272,16 @@ public class frmMain {
 		panel1.add(lblPuzzle);
 		panel1.add(lblFondo1);
 
-		btnJugar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				tbl = new Tablero(4);
-				crearCuadros(lblPreview.getText());
-				setPanelVisible(2);
-			}
-		});
-
-		btnConfig.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setPanelVisible(3);
-			}
-		});
-		btnSalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		frmRompeCabezas.getContentPane().add(panel3);
-
-		JPanel pnlOptions = new JPanel();
-		pnlOptions.setOpaque(false);
-		pnlOptions.setBounds(81, 27, 316, 86);
-		pnlOptions.setLayout(null);
-
-		JRadioButton rdbtnImagenGato = new JRadioButton("Imagen Gato");
-		JRadioButton rdbtnImagenPerro = new JRadioButton("Imagen Perro");
-		JRadioButton rdbtnNumeros = new JRadioButton("Numeros");
-
-		rdbtnImagenPerro.setBounds(54, 60, 230, 23);
-		pnlOptions.add(rdbtnImagenPerro);
-
-		rdbtnImagenGato.setBounds(54, 30, 230, 23);
-		pnlOptions.add(rdbtnImagenGato);
-
-		rdbtnNumeros.setBounds(54, 0, 230, 23);
-		pnlOptions.add(rdbtnNumeros);
-
-		// Default estilo (Numerico)
-		rdbtnNumeros.setSelected(true);
-		lblPreview.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblPreview.setText("numbers");
-		bg.add(rdbtnNumeros);
-		bg.add(rdbtnImagenPerro);
-		bg.add(rdbtnImagenGato);
-
-		JLabel lblSeleccioneLaImagen = new JLabel("Tipo de juego:");
-		lblSeleccioneLaImagen.setBounds(81, 0, 178, 23);
-
-		lblPreview.setOpaque(true);
-		lblPreview.setBounds(118, 165, 250, 250);
-		lblPreview.setIcon(new ImageIcon("img/numbers/preview.png"));
-
-		JLabel lblVistaPrevia = new JLabel("Vista Previa");
-		lblVistaPrevia.setBounds(81, 131, 178, 23);
-
-		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(81, 453, 142, 51);
-
-		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBounds(255, 453, 142, 51);
-
-
-		JLabel lblFondo3 = new JLabel("");
-		lblFondo3.setBounds(0, 0, 485, 515);
-		lblFondo3.setIcon(new ImageIcon("img/background.png"));
-		panel3.setBounds(0, 0, 485, 515);
-		panel3.setLayout(null);
-		panel3.add(btnAceptar);
-		panel3.add(btnVolver);
-		panel3.add(lblVistaPrevia);
-		panel3.add(lblPreview);
-		panel3.add(pnlOptions);
-		panel3.add(lblSeleccioneLaImagen);
-		panel3.add(lblFondo3);
-
 		// ACCIONES
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setPanelVisible(1);
-			}
-		});
-
-		btnVolver.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setPanelVisible(1);
-			}
-		});
-
-		rdbtnNumeros.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent arg0) {
-				changeImagePreview("numbers");
-
-			}
-		});
-		rdbtnImagenGato.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				changeImagePreview("cat");
-			}
-		});
-		rdbtnImagenPerro.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				changeImagePreview("dog");
-			}
-		});
 
 		panel4.setBounds(0, 0, 484, 515);
 		frmRompeCabezas.getContentPane().add(panel4);
 		panel4.setLayout(null);
 
-		JButton btnVolverAJugar = new JButton("Volver a Jugar");
-
-		btnVolverAJugar.addMouseListener(new MouseAdapter() {
+		JButton btnVolverMnu = new JButton("Volver a Jugar");
+		btnVolverMnu.setEnabled(false);
+		btnVolverMnu.setBounds(78, 458, 126, 46);
+		btnVolverMnu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
@@ -291,9 +293,8 @@ public class frmMain {
 				frmMain.main(null);
 			}
 		});
-		btnVolverAJugar.setBounds(78, 458, 126, 46);
-		panel4.add(btnVolverAJugar);
 
+		panel4.add(btnVolverMnu);
 		JButton btnEnd = new JButton("Salir");
 		btnEnd.addMouseListener(new MouseAdapter() {
 			@Override
@@ -301,10 +302,20 @@ public class frmMain {
 				frmRompeCabezas.dispose();
 			}
 		});
+
 		btnEnd.setBounds(242, 458, 126, 46);
 		panel4.add(btnEnd);
-
 		txtNombre = new JTextField();
+		txtNombre.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (txtNombre.getText().equals(""))
+					btnVolverMnu.setEnabled(false);
+				else
+					btnVolverMnu.setEnabled(true);
+
+			}
+		});
 		txtNombre.setBounds(133, 413, 182, 28);
 		panel4.add(txtNombre);
 		txtNombre.setColumns(10);
@@ -315,57 +326,59 @@ public class frmMain {
 		lblEscribeTuNombre.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEscribeTuNombre.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblEscribeTuNombre.setBounds(0, 388, 485, 14);
-		
+		panel4.add(lblEscribeTuNombre);
 
 		JLabel lblFelicitaciones = new JLabel("FELICITACIONES!!!");
 		lblFelicitaciones.setFont(new Font("Tahoma", Font.BOLD, 26));
 		lblFelicitaciones.setBounds(110, 163, 252, 36);
-		
+		panel4.add(lblFelicitaciones);
 
 		lblTiempoFinal.setForeground(Color.WHITE);
 		lblTiempoFinal.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblTiempoFinal.setBounds(79, 330, 271, 14);
-		
+		panel4.add(lblTiempoFinal);
 
 		lblMovimientosFinal = new JLabel("MOVIMIENTOS:");
 		lblMovimientosFinal.setForeground(Color.WHITE);
 		lblMovimientosFinal.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblMovimientosFinal.setBounds(78, 355, 333, 14);
-		
+		panel4.add(lblMovimientosFinal);
 
 		lbWin.setBorder(new LineBorder(new Color(0, 0, 0)));
 		lbWin.setBounds(new Rectangle(41, 0, 400, 323));
+		panel4.add(lbWin);
 
-		
 		JLabel lblFondoWin = new JLabel("");
 		lblFondoWin.setBounds(0, 0, 485, 515);
 		lblFondoWin.setIcon(new ImageIcon("img/background.png"));
 		panel4.add(lblFondoWin);
-		panel4.add(lbWin);
-		panel4.add(lblMovimientosFinal);
-		panel4.add(lblTiempoFinal);
-		panel4.add(lblFelicitaciones);
-		panel4.add(lblEscribeTuNombre);
-		
+
 		setPanelVisible(1);
+
+	}
+
+	private void changeImagePreview(String preview) {
+		lblPreview.setIcon(new ImageIcon("img/" + preview + "/preview.png"));
+		lblPreview.setText(preview);
 
 	}
 
 	private void setPanelVisible(int panelSelected) {
 		switch (panelSelected) {
 		case 1:
+
 			panel1.setVisible(true);
 			panel2.setVisible(false);
 			panel3.setVisible(false);
 			panel4.setVisible(false);
+			crono.setCero(true);
 			break;
 		case 2:
-			@SuppressWarnings("unused")
-			cronometro c = new cronometro();
 			panel1.setVisible(false);
 			panel2.setVisible(true);
 			panel3.setVisible(false);
 			panel4.setVisible(false);
+			crono.setCero(false);
 			break;
 		case 3:
 			panel1.setVisible(false);
@@ -434,25 +447,11 @@ public class frmMain {
 						lblMovimientosFinal.setText(lblMovimientos.getText());
 						lblTiempoFinal.setText(lblTiempo.getText());
 						setPanelVisible(4);
-						playSound("win");
-
 					}
 				}
 			}
 		});
 
-	}
-
-	private void changeImagePreview(String preview) {
-		lblPreview.setIcon(new ImageIcon("img/" + preview + "/preview.png"));
-		lblPreview.setText(preview);
-
-	}
-
-	private static void playSound(String sound) {
-		String audioFilePath = "sounds/" + sound + ".wav";
-		Sonidos player = new Sonidos();
-		player.play(audioFilePath);
 	}
 
 }
