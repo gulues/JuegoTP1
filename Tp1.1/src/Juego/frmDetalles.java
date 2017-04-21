@@ -11,6 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -31,18 +32,23 @@ public class frmDetalles extends JDialog {
 		contentPanel.setLayout(null);
 
 		modeloJugadores = new DefaultTableModel();
+		modeloJugadores.addColumn("Puesto");
 		modeloJugadores.addColumn("Nombre Jugador");
 		modeloJugadores.addColumn("Tiempo");
 		modeloJugadores.addColumn("Movimientos");
 		tblJugadores = new JTable(modeloJugadores);
 		tblJugadores.setFillsViewportHeight(true);
 		scrollTblJugadores.setViewportView(tblJugadores);
-
+		// Deshabilitar edicion de tablas
+				for (int c = 0; c < tblJugadores.getColumnCount(); c++) {
+					Class<?> col_class = tblJugadores.getColumnClass(c);
+					tblJugadores.setDefaultEditor(col_class, null); // remove editor
+				}
 		ArrayList<Jugador> lista = new ArrayList<Jugador>();
 		archivos ar = new archivos();
 		ar.abrir();
 		lista = archivos.datos;
-		ordenar or = new ordenar(lista);
+		ordenarScore or = new ordenarScore(lista);
 		or.ordenarMov();
 		refreshTable(lista);
 
@@ -74,12 +80,13 @@ public class frmDetalles extends JDialog {
 			modeloJugadores.removeRow(i);
 			i -= 1;
 		}
-		Object[] arreglo = new String[3];
-
+		Object[] arreglo = new String[4];
+		int cont=1;
 		for (Jugador j : listadoJugadores) {
-			arreglo[0] = j.nombre;
-			arreglo[1] = j.tiempo;
-			arreglo[2] = j.movimientos + "";
+			arreglo[0] = cont++ +"";
+			arreglo[1] = j.nombre;
+			arreglo[2] = j.tiempo;
+			arreglo[3] = j.movimientos + "";
 			modeloJugadores.addRow(arreglo);
 		}
 
