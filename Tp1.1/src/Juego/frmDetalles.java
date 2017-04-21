@@ -45,9 +45,9 @@ public class frmDetalles extends JDialog {
 					tblJugadores.setDefaultEditor(col_class, null); // remove editor
 				}
 		ArrayList<Jugador> lista = new ArrayList<Jugador>();
-		archivos ar = new archivos();
+		archivo ar = new archivo();
 		ar.abrir();
-		lista = archivos.datos;
+		lista = archivo.datos;
 		ordenarScore or = new ordenarScore(lista);
 		or.ordenarMov();
 		refreshTable(lista);

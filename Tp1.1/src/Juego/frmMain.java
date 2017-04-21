@@ -285,7 +285,7 @@ public class frmMain {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				archivos file = new archivos();
+				archivo file = new archivo();
 				Jugador j = new Jugador(txtNombre.getText(), lblTiempoFinal
 						.getText(), movimientos);
 				file.guardar(j);
@@ -395,7 +395,8 @@ public class frmMain {
 		}
 
 	}
-
+//metodo para crear los Jlabel dinamicamente
+//los 16 Jlabel situan en un cuadrado de 4 * 4
 	private void crearCuadros(String Style) {
 		int cont = 0;
 		int posX = 0;
@@ -420,6 +421,8 @@ public class frmMain {
 	}
 
 	// Crear las acciones del clic en cada uno de los Cuadros: Jlabel[]
+	// Cada Jlabel.getText tendra la coordenada para identificar en
+	// la clase matriz y poder validar su movimiento
 	private void setActionListened(int index, String Style) {
 		cuadro[index].addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -429,9 +432,11 @@ public class frmMain {
 				Point cuadroXY = new Point(Integer.parseInt(coord[0]), Integer
 						.parseInt(coord[1]));
 				if (tbl.moverCuadrado(cuadroXY)) {
+				//se puede permutar este cuadrado y se sobreescribe la matriz
 					Matriz = tbl.getTabla();
 					int cont = 0;
 					lblMovimientos.setText("Movimientos: " + movimientos++);
+				//se establece cada Jlabel con su coordenada x,y.	
 					for (int i = 0; i < tbl.size; i++) {
 						for (int j = 0; j < tbl.size; j++) {
 							cuadro[cont].setText(i + "," + j);

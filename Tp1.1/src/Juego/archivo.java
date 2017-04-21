@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class archivos implements Serializable {
+public class archivo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	public static ArrayList<Jugador> datos = new ArrayList<Jugador>();
 	public final static String path = "db.txt";
